@@ -1,15 +1,22 @@
 import { useState } from "react";
 
+// Typage
+import type { PaymentMethod } from "../types/base";
+interface PaymentFormData extends PaymentMethod {
+  [key: string]: string;
+  cardholderName: string;
+}
+
 export const usePaymentForm = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<PaymentFormData>({
     cardNumber: "",
     expiryDate: "",
     cvv: "",
     cardholderName: "",
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<{ [key: string]: string | null }>({});
 
-  const updateField = (name, value) => {
+  const updateField = (name: string, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -24,7 +31,7 @@ export const usePaymentForm = () => {
     }
   };
 
-  const validateField = (name, value) => {
+  const validateField = (name: string, value: string) => {
     switch (name) {
       case "cardNumber":
         const cleanCardNumber = value.replace(/\s/g, "");
@@ -68,7 +75,7 @@ export const usePaymentForm = () => {
   };
 
   const validateForm = () => {
-    const newErrors = {};
+    const newErrors: { [key: string]: string | null } = {};
     let isValid = true;
 
     Object.keys(formData).forEach((fieldName) => {
@@ -83,7 +90,7 @@ export const usePaymentForm = () => {
     return isValid;
   };
 
-  const formatCardNumber = (value) => {
+  const formatCardNumber = (value: string) => {
     const v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
     const matches = v.match(/\d{4,16}/g);
     const match = (matches && matches[0]) || "";
@@ -98,7 +105,7 @@ export const usePaymentForm = () => {
     }
   };
 
-  const formatExpiryDate = (value) => {
+  const formatExpiryDate = (value: string) => {
     const v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
     if (v.length >= 2) {
       return v.substring(0, 2) + "/" + v.substring(2, 4);

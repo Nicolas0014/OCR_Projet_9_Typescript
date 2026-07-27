@@ -19,7 +19,17 @@ import aloeVera from "../assets/aloeVera.jpeg";
 import echeveria from "../assets/echeveria.jpeg";
 import crassula from "../assets/crassula.jpg";
 
-export const plantList = [
+// Typage
+import type { Plant } from "../types/base";
+interface PlantList extends Plant {
+  cover: string;
+  category: string;
+  light: number;
+  water: number;
+  description: string;
+}
+
+export const plantList: PlantList[] = [
   {
     name: "monstera",
     category: "classique",
