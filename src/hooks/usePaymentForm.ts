@@ -2,13 +2,9 @@ import { useState } from "react";
 
 // Typage
 import type { PaymentMethod } from "../types/base";
-interface PaymentFormData extends PaymentMethod {
-  [key: string]: string;
-  cardholderName: string;
-}
 
 export const usePaymentForm = () => {
-  const [formData, setFormData] = useState<PaymentFormData>({
+  const [formData, setFormData] = useState<PaymentMethod>({
     cardNumber: "",
     expiryDate: "",
     cvv: "",

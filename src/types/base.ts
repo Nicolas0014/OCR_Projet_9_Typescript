@@ -1,14 +1,3 @@
-export interface PlantOld {
-  id: string;
-  name: string;
-  description: string;
-  cover: string;
-  category: string;
-  water: number;
-  light: number;
-  price: number;
-}
-
 export interface Plant {
   id: string;
   name: string;
@@ -32,9 +21,11 @@ export interface PromisePaymentData extends PaymentData {
 }
 
 export interface PaymentMethod {
+  // [key: string]: string;
   cardNumber: string;
   expiryDate: string;
   cvv: string;
+  cardholderName: string;
 }
 
 export interface PaymentResult {
